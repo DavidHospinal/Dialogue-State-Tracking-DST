@@ -7,6 +7,7 @@
 [![Paper](https://img.shields.io/badge/Paper-Interspeech%202022-red.svg)](https://www.isca-speech.org/archive/interspeech_2022/kapelonis22_interspeech.html)
 
 > **Implementación completa del paper "A Multi-Task BERT Model for Schema-Guided Dialogue State Tracking"** (Kapelonis et al., 2022) para optimización de diálogos inteligentes en sistemas conversacionales.
+![dstgenerated-image (2)](https://github.com/user-attachments/assets/7600ddb3-c0c4-47d1-8946-6ad269bcbea7)
 
 ---
 
