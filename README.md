@@ -354,6 +354,9 @@ Este proyecto está licenciado bajo la **MIT License** - ver el archivo [LICENSE
 
 **⭐ Si este proyecto te fue útil, dale una estrella en GitHub!**
 
+![Banner Hospinal Systems](https://github.com/user-attachments/assets/e2da3307-c083-483b-bdda-8fceb8b911d1)
+
+
 **🔔 Suscríbete a mi canal de YouTube para más tutoriales de IA/ML**
 
 </div>
