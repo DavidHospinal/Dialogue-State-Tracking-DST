@@ -1,0 +1,1621 @@
+!python -m mtsgdst.train --num_epochs=5 --num_total_epochs=5 --num_steps_logging=4000
+
+2023-12-15 16:42:49.821127: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 16:42:49.821181: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 16:42:49.823019: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 16:42:50.944775: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+[nltk_data] Downloading package wordnet to /root/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+Downloading: 100% 420M/420M [00:11<00:00, 40.0MB/s]
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+MultitaskModel(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30528, 768)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (dropout1): Dropout(p=0.3, inplace=False)
+  (cl_value): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=768, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=768, out_features=2, bias=True)
+  )
+  (cl_start): ClassificationHead(
+    (linear1): Linear(in_features=1536, out_features=768, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=768, out_features=1, bias=True)
+  )
+  (cl_end): ClassificationHead(
+    (linear1): Linear(in_features=1536, out_features=768, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=768, out_features=1, bias=True)
+  )
+  (cl_cross): ClassificationHead(
+    (linear1): Linear(in_features=1536, out_features=768, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=768, out_features=2, bias=True)
+  )
+  (cl_intent_status): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=128, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=128, out_features=2, bias=True)
+  )
+  (cl_intent_value): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=128, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=128, out_features=2, bias=True)
+  )
+  (cl_usr_status): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=16, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=22, out_features=3, bias=True)
+  )
+  (cl_copy_status): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=16, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=22, out_features=4, bias=True)
+  )
+  (cl_req_status): ClassificationHead(
+    (linear1): Linear(in_features=768, out_features=16, bias=True)
+    (dropout): Dropout(p=0.3, inplace=False)
+    (linear2): Linear(in_features=22, out_features=2, bias=True)
+  )
+)
+/usr/local/lib/python3.10/dist-packages/transformers/optimization.py:306: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+=== TRAINING ===
+Script called with args:
+Namespace(load_checkpoint_path=None, num_epochs=5, num_total_epochs=5, num_steps_logging=4000)
+=== TRAINING ===
+Epoch: 1
+ 36% 3999/10987 [25:27<45:14,  2.57it/s]
+Validation loss: 0.028946622359235
+Saving checkpoint for epoch 1
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 17:23:12.603931: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 17:23:12.603983: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 17:23:12.605840: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 17:23:13.647715: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 17:23:15.247247 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 17:23:15.269430 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 17:23:15.292397 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 17:23:15.458153 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 17:23:15.485703 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 17:23:15.499504 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 17:23:15.524082 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 17:23:15.536643 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 17:23:15.744575 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 17:23:15.778086 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 17:23:15.803265 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 17:23:15.832475 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 17:23:16.072766 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 17:23:16.106759 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 17:23:16.146977 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 17:23:16.191707 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 17:23:16.469187 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 17:23:16.521442 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 17:23:16.563986 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 17:23:16.606366 133272600453760 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 17:23:16.641901 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 17:23:16.662538 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 17:23:16.977700 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 17:23:16.994132 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 17:23:17.017095 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 17:23:17.029615 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 17:23:17.051251 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 17:23:17.062456 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 17:23:17.097179 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 17:23:17.128657 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 17:23:17.149815 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 17:23:17.176285 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 17:23:17.570318 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 17:23:17.604352 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 17:23:17.642086 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 17:23:17.682631 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 17:23:17.720717 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 17:23:17.770555 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 17:23:17.813792 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 17:23:17.854685 133272600453760 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 17:23:17.887077 133272600453760 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.948191893239253, 'requested_slots_f1': 0.9782210924788675, 'requested_slots_precision': 0.9897540616891003, 'requested_slots_recall': 0.9819572803620048, 'average_goal_accuracy': 0.8603897246977853, 'average_cat_accuracy': 0.8889488023612214, 'average_noncat_accuracy': 0.8597608322515505, 'joint_goal_accuracy': 0.6307622422989607, 'joint_cat_accuracy': 0.8511549388561782, 'joint_noncat_accuracy': 0.7075707513299075}
+I1215 17:23:26.252864 133272600453760 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.948191893239253, 'requested_slots_f1': 0.9782210924788675, 'requested_slots_precision': 0.9897540616891003, 'requested_slots_recall': 0.9819572803620048, 'average_goal_accuracy': 0.8603897246977853, 'average_cat_accuracy': 0.8889488023612214, 'average_noncat_accuracy': 0.8597608322515505, 'joint_goal_accuracy': 0.6307622422989607, 'joint_cat_accuracy': 0.8511549388561782, 'joint_noncat_accuracy': 0.7075707513299075}
+Validation accuracy: 0.6307622422989607
+Validation unseen accuracy: 0.6369584216282967
+Saving checkpoint for epoch 1
+Saving checkpoint for epoch 1
+ 73% 7999/10987 [1:03:43<19:01,  2.62it/s]
+Validation loss: 0.019035136813859946
+Saving checkpoint for epoch 1
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 18:01:29.357039: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 18:01:29.357093: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 18:01:29.358874: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 18:01:30.387653: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 18:01:31.977753 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 18:01:32.000530 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 18:01:32.023633 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 18:01:32.184687 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 18:01:32.214139 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 18:01:32.228229 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 18:01:32.252918 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 18:01:32.265729 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 18:01:32.478437 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 18:01:32.510552 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 18:01:32.535812 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 18:01:32.564779 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 18:01:32.808418 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 18:01:32.842385 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 18:01:32.882604 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 18:01:32.926367 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 18:01:33.206456 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 18:01:33.257740 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 18:01:33.299267 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 18:01:33.340866 136598942134912 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 18:01:33.376405 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 18:01:33.397604 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 18:01:33.713052 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 18:01:33.729361 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 18:01:33.752482 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 18:01:33.765312 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 18:01:33.788172 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 18:01:33.800050 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 18:01:33.834938 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 18:01:33.866902 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 18:01:33.888280 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 18:01:33.914685 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 18:01:34.310950 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 18:01:34.345164 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 18:01:34.384833 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 18:01:34.427132 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 18:01:34.465513 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 18:01:34.514503 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 18:01:34.557995 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 18:01:34.598691 136598942134912 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 18:01:34.632364 136598942134912 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9612685508302335, 'requested_slots_f1': 0.9862305224271708, 'requested_slots_precision': 0.9933977579220513, 'requested_slots_recall': 0.9889366108064578, 'average_goal_accuracy': 0.9297901080423934, 'average_cat_accuracy': 0.9314243009043782, 'average_noncat_accuracy': 0.9342146473388143, 'joint_goal_accuracy': 0.7530846210837135, 'joint_cat_accuracy': 0.8831061884959032, 'joint_noncat_accuracy': 0.8297367845994553}
+I1215 18:01:42.677315 136598942134912 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9612685508302335, 'requested_slots_f1': 0.9862305224271708, 'requested_slots_precision': 0.9933977579220513, 'requested_slots_recall': 0.9889366108064578, 'average_goal_accuracy': 0.9297901080423934, 'average_cat_accuracy': 0.9314243009043782, 'average_noncat_accuracy': 0.9342146473388143, 'joint_goal_accuracy': 0.7530846210837135, 'joint_cat_accuracy': 0.8831061884959032, 'joint_noncat_accuracy': 0.8297367845994553}
+Validation accuracy: 0.7530846210837135
+Validation unseen accuracy: 0.7002573975478522
+Saving checkpoint for epoch 1
+Saving checkpoint for epoch 1
+100% 10986/10987 [1:35:34<00:00,  2.62it/s]
+Validation loss: 0.016418273366318674
+Saving checkpoint for epoch 1
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 18:33:29.764378: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 18:33:29.764436: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 18:33:29.766260: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 18:33:30.815236: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 18:33:32.427526 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 18:33:32.450381 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 18:33:32.474088 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 18:33:32.639508 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 18:33:32.666862 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 18:33:32.680679 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 18:33:32.705495 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 18:33:32.718850 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 18:33:32.934998 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 18:33:32.967204 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 18:33:32.992565 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 18:33:33.022289 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 18:33:33.268803 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 18:33:33.303142 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 18:33:33.343477 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 18:33:33.387653 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 18:33:33.672947 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 18:33:33.725041 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 18:33:33.768738 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 18:33:33.811718 133773560144512 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 18:33:33.847777 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 18:33:33.868856 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 18:33:34.189139 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 18:33:34.205618 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 18:33:34.228416 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 18:33:34.240812 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 18:33:34.262399 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 18:33:34.273855 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 18:33:34.308467 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 18:33:34.340051 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 18:33:34.361123 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 18:33:34.387634 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 18:33:34.794095 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 18:33:34.828876 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 18:33:34.867401 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 18:33:34.908736 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 18:33:34.947064 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 18:33:34.995712 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 18:33:35.039030 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 18:33:35.080046 133773560144512 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 18:33:35.112637 133773560144512 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9639912566629597, 'requested_slots_f1': 0.9883230432948575, 'requested_slots_precision': 0.9957050274187981, 'requested_slots_recall': 0.9891091766690954, 'average_goal_accuracy': 0.946720069217722, 'average_cat_accuracy': 0.9393376092632535, 'average_noncat_accuracy': 0.9570407976345016, 'joint_goal_accuracy': 0.8270295691989108, 'joint_cat_accuracy': 0.9158809239510849, 'joint_noncat_accuracy': 0.8896610938374812}
+I1215 18:33:43.149844 133773560144512 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9639912566629597, 'requested_slots_f1': 0.9883230432948575, 'requested_slots_precision': 0.9957050274187981, 'requested_slots_recall': 0.9891091766690954, 'average_goal_accuracy': 0.946720069217722, 'average_cat_accuracy': 0.9393376092632535, 'average_noncat_accuracy': 0.9570407976345016, 'joint_goal_accuracy': 0.8270295691989108, 'joint_cat_accuracy': 0.9158809239510849, 'joint_noncat_accuracy': 0.8896610938374812}
+Validation accuracy: 0.8270295691989108
+Validation unseen accuracy: 0.7769414903413603
+Saving checkpoint for epoch 1
+Saving checkpoint for epoch 1
+100% 10987/10987 [1:48:35<00:00,  1.69it/s] 
+
+Train loss: 0.05416418052480795
+Epoch: 2
+ 36% 3999/10987 [25:35<45:14,  2.57it/s]
+Validation loss: 0.013980441899965532
+Saving checkpoint for epoch 2
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 19:12:07.470623: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 19:12:07.470692: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 19:12:07.472476: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 19:12:08.512576: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 19:12:10.200058 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 19:12:10.222576 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 19:12:10.245811 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 19:12:10.409359 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 19:12:10.438005 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 19:12:10.451978 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 19:12:10.476914 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 19:12:10.489882 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 19:12:10.696286 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 19:12:10.728435 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 19:12:10.753865 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 19:12:10.782849 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 19:12:11.039105 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 19:12:11.073479 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 19:12:11.113932 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 19:12:11.157811 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 19:12:11.436627 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 19:12:11.488574 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 19:12:11.530605 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 19:12:11.573096 132273359499904 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 19:12:11.608793 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 19:12:11.630154 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 19:12:11.951894 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 19:12:11.968396 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 19:12:11.991961 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 19:12:12.005049 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 19:12:12.027369 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 19:12:12.039102 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 19:12:12.074431 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 19:12:12.106503 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 19:12:12.128050 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 19:12:12.155152 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 19:12:12.559849 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 19:12:12.594250 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 19:12:12.632192 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 19:12:12.673586 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 19:12:12.711971 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 19:12:12.761286 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 19:12:12.803143 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 19:12:12.843878 132273359499904 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 19:12:12.878396 132273359499904 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.957510449821682, 'requested_slots_f1': 0.991599238153673, 'requested_slots_precision': 0.9959478978921399, 'requested_slots_recall': 0.9927330597844845, 'average_goal_accuracy': 0.968092331637205, 'average_cat_accuracy': 0.9571271805350587, 'average_noncat_accuracy': 0.9749534328573489, 'joint_goal_accuracy': 0.864354561490969, 'joint_cat_accuracy': 0.9202865730637789, 'joint_noncat_accuracy': 0.9317937949917552}
+I1215 19:12:20.842460 132273359499904 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.957510449821682, 'requested_slots_f1': 0.991599238153673, 'requested_slots_precision': 0.9959478978921399, 'requested_slots_recall': 0.9927330597844845, 'average_goal_accuracy': 0.968092331637205, 'average_cat_accuracy': 0.9571271805350587, 'average_noncat_accuracy': 0.9749534328573489, 'joint_goal_accuracy': 0.864354561490969, 'joint_cat_accuracy': 0.9202865730637789, 'joint_noncat_accuracy': 0.9317937949917552}
+Validation accuracy: 0.864354561490969
+Validation unseen accuracy: 0.7996199082649731
+Saving checkpoint for epoch 2
+Saving checkpoint for epoch 2
+ 73% 7999/10987 [1:04:13<18:47,  2.65it/s]
+Validation loss: 0.01604557885565683
+Saving checkpoint for epoch 2
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 19:50:50.602317: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 19:50:50.602376: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 19:50:50.604219: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 19:50:51.652445: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 19:50:53.289367 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 19:50:53.312074 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 19:50:53.335779 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 19:50:53.505624 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 19:50:53.533732 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 19:50:53.547717 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 19:50:53.572721 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 19:50:53.585824 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 19:50:53.799524 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 19:50:53.831825 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 19:50:53.857008 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 19:50:53.886186 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 19:50:54.133844 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 19:50:54.168719 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 19:50:54.209318 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 19:50:54.253699 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 19:50:54.540148 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 19:50:54.593441 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 19:50:54.635879 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 19:50:54.678476 134715680952960 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 19:50:54.714484 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 19:50:54.735586 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 19:50:55.060012 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 19:50:55.076688 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 19:50:55.100084 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 19:50:55.113014 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 19:50:55.135093 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 19:50:55.146683 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 19:50:55.181646 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 19:50:55.213554 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 19:50:55.235078 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 19:50:55.261748 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 19:50:55.666896 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 19:50:55.701421 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 19:50:55.739751 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 19:50:55.781707 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 19:50:55.820170 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 19:50:55.869035 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 19:50:55.912768 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 19:50:55.953417 134715680952960 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 19:50:55.987012 134715680952960 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9635310810292596, 'requested_slots_f1': 0.9919558742697909, 'requested_slots_precision': 0.9964783781365444, 'requested_slots_recall': 0.9926563638455344, 'average_goal_accuracy': 0.9693624802690276, 'average_cat_accuracy': 0.9576616717750784, 'average_noncat_accuracy': 0.9773001514495888, 'joint_goal_accuracy': 0.880123934501668, 'joint_cat_accuracy': 0.9385679581669206, 'joint_noncat_accuracy': 0.9311077785021282}
+I1215 19:51:04.070985 134715680952960 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9635310810292596, 'requested_slots_f1': 0.9919558742697909, 'requested_slots_precision': 0.9964783781365444, 'requested_slots_recall': 0.9926563638455344, 'average_goal_accuracy': 0.9693624802690276, 'average_cat_accuracy': 0.9576616717750784, 'average_noncat_accuracy': 0.9773001514495888, 'joint_goal_accuracy': 0.880123934501668, 'joint_cat_accuracy': 0.9385679581669206, 'joint_noncat_accuracy': 0.9311077785021282}
+Validation accuracy: 0.880123934501668
+Validation unseen accuracy: 0.8343521513627944
+Saving checkpoint for epoch 2
+Saving checkpoint for epoch 2
+100% 10986/10987 [1:36:26<00:00,  2.64it/s]
+Validation loss: 0.013786977673092006
+Saving checkpoint for epoch 2
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 20:23:04.122326: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 20:23:04.122378: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 20:23:04.124217: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 20:23:05.179233: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 20:23:06.829501 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 20:23:06.852141 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 20:23:06.875369 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 20:23:07.046763 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 20:23:07.075550 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 20:23:07.089487 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 20:23:07.115135 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 20:23:07.128215 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 20:23:07.344112 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 20:23:07.376638 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 20:23:07.401977 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 20:23:07.431578 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 20:23:07.683493 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 20:23:07.717923 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 20:23:07.758695 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 20:23:07.804574 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 20:23:08.093997 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 20:23:08.146888 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 20:23:08.189037 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 20:23:08.231696 140711286579840 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 20:23:08.268169 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 20:23:08.289360 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 20:23:08.608624 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 20:23:08.625130 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 20:23:08.648778 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 20:23:08.661861 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 20:23:08.684254 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 20:23:08.695932 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 20:23:08.730882 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 20:23:08.762638 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 20:23:08.784825 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 20:23:08.812352 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 20:23:09.212326 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 20:23:09.246784 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 20:23:09.285245 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 20:23:09.326608 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 20:23:09.365182 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 20:23:09.414307 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 20:23:09.458206 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 20:23:09.498778 140711286579840 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 20:23:09.532352 140711286579840 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9654484795030103, 'requested_slots_f1': 0.9929260778975086, 'requested_slots_precision': 0.9966317700144444, 'requested_slots_recall': 0.993883498868735, 'average_goal_accuracy': 0.9747328583193624, 'average_cat_accuracy': 0.9645769478185188, 'average_noncat_accuracy': 0.9813405307947498, 'joint_goal_accuracy': 0.8860299767611305, 'joint_cat_accuracy': 0.9412854613579281, 'joint_noncat_accuracy': 0.9357858110979024}
+I1215 20:23:17.468734 140711286579840 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9654484795030103, 'requested_slots_f1': 0.9929260778975086, 'requested_slots_precision': 0.9966317700144444, 'requested_slots_recall': 0.993883498868735, 'average_goal_accuracy': 0.9747328583193624, 'average_cat_accuracy': 0.9645769478185188, 'average_noncat_accuracy': 0.9813405307947498, 'joint_goal_accuracy': 0.8860299767611305, 'joint_cat_accuracy': 0.9412854613579281, 'joint_noncat_accuracy': 0.9357858110979024}
+Validation accuracy: 0.8860299767611305
+Validation unseen accuracy: 0.8357927497574315
+Saving checkpoint for epoch 2
+Saving checkpoint for epoch 2
+100% 10987/10987 [1:49:34<00:00,  1.67it/s] 
+
+Train loss: 0.014303368810112519
+Epoch: 3
+ 36% 3999/10987 [25:39<43:03,  2.71it/s]
+Validation loss: 0.015285446941885154
+Saving checkpoint for epoch 3
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 21:01:48.609631: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 21:01:48.609698: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 21:01:48.611530: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 21:01:49.673351: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 21:01:51.300251 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 21:01:51.323341 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 21:01:51.346346 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 21:01:51.516535 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 21:01:51.544956 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 21:01:51.559043 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 21:01:51.584013 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 21:01:51.597289 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 21:01:51.812309 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 21:01:51.844611 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 21:01:51.869839 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 21:01:51.899195 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 21:01:52.148530 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 21:01:52.183803 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 21:01:52.225096 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 21:01:52.269783 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 21:01:52.551349 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 21:01:52.604681 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 21:01:52.647207 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 21:01:52.689785 138494662599296 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 21:01:52.725657 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 21:01:52.746581 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 21:01:53.065400 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 21:01:53.081874 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 21:01:53.105103 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 21:01:53.117892 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 21:01:53.139880 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 21:01:53.151377 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 21:01:53.186880 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 21:01:53.219089 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 21:01:53.240556 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 21:01:53.267579 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 21:01:53.664268 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 21:01:53.698497 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 21:01:53.736608 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 21:01:53.778177 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 21:01:53.816768 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 21:01:53.865622 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 21:01:53.909992 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 21:01:53.950543 138494662599296 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 21:01:53.984089 138494662599296 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9664071787398857, 'requested_slots_f1': 0.9914816377139498, 'requested_slots_precision': 0.9976799478467616, 'requested_slots_recall': 0.9915250987460213, 'average_goal_accuracy': 0.9762878432699, 'average_cat_accuracy': 0.9652911794755363, 'average_noncat_accuracy': 0.9828529712966969, 'joint_goal_accuracy': 0.8925970432181616, 'joint_cat_accuracy': 0.944167661712027, 'joint_noncat_accuracy': 0.9396659505311193}
+I1215 21:02:01.977442 138494662599296 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9664071787398857, 'requested_slots_f1': 0.9914816377139498, 'requested_slots_precision': 0.9976799478467616, 'requested_slots_recall': 0.9915250987460213, 'average_goal_accuracy': 0.9762878432699, 'average_cat_accuracy': 0.9652911794755363, 'average_noncat_accuracy': 0.9828529712966969, 'joint_goal_accuracy': 0.8925970432181616, 'joint_cat_accuracy': 0.944167661712027, 'joint_noncat_accuracy': 0.9396659505311193}
+Validation accuracy: 0.8925970432181616
+Validation unseen accuracy: 0.8435796856311193
+Saving checkpoint for epoch 3
+Saving checkpoint for epoch 3
+ 73% 7999/10987 [1:04:23<20:09,  2.47it/s]
+Validation loss: 0.0142053145465667
+Saving checkpoint for epoch 3
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 21:40:36.944525: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 21:40:36.944580: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 21:40:36.946382: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 21:40:38.007547: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 21:40:39.654925 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 21:40:39.677275 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 21:40:39.700713 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 21:40:39.873188 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 21:40:39.901404 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 21:40:39.915304 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 21:40:39.939947 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 21:40:39.952987 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 21:40:40.167636 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 21:40:40.200010 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 21:40:40.225814 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 21:40:40.255678 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 21:40:40.506641 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 21:40:40.540998 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 21:40:40.581797 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 21:40:40.626609 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 21:40:40.910148 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 21:40:40.962472 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 21:40:41.004336 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 21:40:41.047103 135422671164032 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 21:40:41.082995 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 21:40:41.104422 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 21:40:41.420687 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 21:40:41.437408 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 21:40:41.461453 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 21:40:41.474501 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 21:40:41.496746 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 21:40:41.508534 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 21:40:41.543568 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 21:40:41.575333 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 21:40:41.596735 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 21:40:41.623480 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 21:40:42.019340 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 21:40:42.053798 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 21:40:42.092332 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 21:40:42.133672 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 21:40:42.172264 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 21:40:42.221064 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 21:40:42.264487 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 21:40:42.305927 135422671164032 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 21:40:42.338829 135422671164032 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9628791655481842, 'requested_slots_f1': 0.9946696322429728, 'requested_slots_precision': 0.9973028594802571, 'requested_slots_recall': 0.9954365916324731, 'average_goal_accuracy': 0.9684496720491779, 'average_cat_accuracy': 0.948575320694744, 'average_noncat_accuracy': 0.9795511899610558, 'joint_goal_accuracy': 0.8797198105610308, 'joint_cat_accuracy': 0.9383209124222835, 'joint_noncat_accuracy': 0.932900018867201}
+I1215 21:40:50.326711 135422671164032 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9628791655481842, 'requested_slots_f1': 0.9946696322429728, 'requested_slots_precision': 0.9973028594802571, 'requested_slots_recall': 0.9954365916324731, 'average_goal_accuracy': 0.9684496720491779, 'average_cat_accuracy': 0.948575320694744, 'average_noncat_accuracy': 0.9795511899610558, 'joint_goal_accuracy': 0.8797198105610308, 'joint_cat_accuracy': 0.9383209124222835, 'joint_noncat_accuracy': 0.932900018867201}
+Validation accuracy: 0.8797198105610308
+Validation unseen accuracy: 0.8399115639057952
+Saving checkpoint for epoch 3
+100% 10986/10987 [1:36:32<00:00,  2.50it/s]
+Validation loss: 0.013691104226085027
+Saving checkpoint for epoch 3
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 22:12:38.839207: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 22:12:38.839262: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 22:12:38.841097: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 22:12:39.888996: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 22:12:41.511339 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 22:12:41.533838 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 22:12:41.556909 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 22:12:41.727782 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 22:12:41.755346 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 22:12:41.769011 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 22:12:41.793928 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 22:12:41.806884 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 22:12:42.025825 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 22:12:42.058373 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 22:12:42.084205 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 22:12:42.113816 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 22:12:42.361325 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 22:12:42.395634 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 22:12:42.435814 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 22:12:42.480007 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 22:12:42.774627 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 22:12:42.827393 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 22:12:42.869808 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 22:12:42.912828 140521974506112 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 22:12:42.949193 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 22:12:42.970541 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 22:12:43.293430 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 22:12:43.310122 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 22:12:43.333482 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 22:12:43.346423 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 22:12:43.368638 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 22:12:43.380316 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 22:12:43.415498 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 22:12:43.448096 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 22:12:43.469754 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 22:12:43.496860 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 22:12:43.899422 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 22:12:43.934391 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 22:12:43.972633 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 22:12:44.014310 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 22:12:44.052457 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 22:12:44.102079 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 22:12:44.145682 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 22:12:44.186142 140521974506112 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 22:12:44.221439 140521974506112 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9651800437166852, 'requested_slots_f1': 0.9944024747222966, 'requested_slots_precision': 0.9961268550830235, 'requested_slots_recall': 0.9960309851593359, 'average_goal_accuracy': 0.9737637356981087, 'average_cat_accuracy': 0.9630302342301432, 'average_noncat_accuracy': 0.9805027405163709, 'joint_goal_accuracy': 0.8930522566246116, 'joint_cat_accuracy': 0.9467204677399432, 'joint_noncat_accuracy': 0.9394871186102697}
+I1215 22:12:52.463615 140521974506112 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9651800437166852, 'requested_slots_f1': 0.9944024747222966, 'requested_slots_precision': 0.9961268550830235, 'requested_slots_recall': 0.9960309851593359, 'average_goal_accuracy': 0.9737637356981087, 'average_cat_accuracy': 0.9630302342301432, 'average_noncat_accuracy': 0.9805027405163709, 'joint_goal_accuracy': 0.8930522566246116, 'joint_cat_accuracy': 0.9467204677399432, 'joint_noncat_accuracy': 0.9394871186102697}
+Validation accuracy: 0.8930522566246116
+Validation unseen accuracy: 0.8454669573961365
+Saving checkpoint for epoch 3
+Saving checkpoint for epoch 3
+100% 10987/10987 [1:49:34<00:00,  1.67it/s] 
+
+Train loss: 0.010065677939277512
+Epoch: 4
+ 36% 3999/10987 [25:34<44:20,  2.63it/s]
+Validation loss: 0.015037837276826607
+Saving checkpoint for epoch 4
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 22:51:10.927990: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 22:51:10.928047: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 22:51:10.929939: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 22:51:11.983702: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 22:51:13.601629 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 22:51:13.624075 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 22:51:13.647058 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 22:51:13.812612 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 22:51:13.840519 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 22:51:13.854301 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 22:51:13.878812 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 22:51:13.891641 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 22:51:14.104988 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 22:51:14.136951 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 22:51:14.162253 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 22:51:14.192001 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 22:51:14.436674 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 22:51:14.470852 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 22:51:14.511069 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 22:51:14.555392 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 22:51:14.837277 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 22:51:14.889623 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 22:51:14.939867 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 22:51:14.982397 132274784477824 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 22:51:15.018320 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 22:51:15.039156 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 22:51:15.360084 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 22:51:15.376704 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 22:51:15.399642 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 22:51:15.412245 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 22:51:15.434527 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 22:51:15.446137 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 22:51:15.481096 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 22:51:15.513102 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 22:51:15.534678 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 22:51:15.561419 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 22:51:15.963753 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 22:51:15.998069 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 22:51:16.036110 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 22:51:16.077231 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 22:51:16.115624 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 22:51:16.165068 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 22:51:16.209299 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 22:51:16.249755 132274784477824 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 22:51:16.282731 132274784477824 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9666372665567359, 'requested_slots_f1': 0.9932609834975905, 'requested_slots_precision': 0.9973667727627157, 'requested_slots_recall': 0.9939410208229474, 'average_goal_accuracy': 0.970494859652735, 'average_cat_accuracy': 0.9584846936844893, 'average_noncat_accuracy': 0.9779456512332324, 'joint_goal_accuracy': 0.882436457261188, 'joint_cat_accuracy': 0.9414089842302467, 'joint_noncat_accuracy': 0.9325159064309545}
+I1215 22:51:24.220381 132274784477824 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9666372665567359, 'requested_slots_f1': 0.9932609834975905, 'requested_slots_precision': 0.9973667727627157, 'requested_slots_recall': 0.9939410208229474, 'average_goal_accuracy': 0.970494859652735, 'average_cat_accuracy': 0.9584846936844893, 'average_noncat_accuracy': 0.9779456512332324, 'joint_goal_accuracy': 0.882436457261188, 'joint_cat_accuracy': 0.9414089842302467, 'joint_noncat_accuracy': 0.9325159064309545}
+Validation accuracy: 0.882436457261188
+Validation unseen accuracy: 0.8393547142983153
+Saving checkpoint for epoch 4
+ 73% 7999/10987 [1:03:56<18:06,  2.75it/s]
+Validation loss: 0.015364361253065848
+Saving checkpoint for epoch 4
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-15 23:29:29.057276: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-15 23:29:29.057334: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-15 23:29:29.059202: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-15 23:29:30.101794: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1215 23:29:31.701594 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1215 23:29:31.724379 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1215 23:29:31.747572 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1215 23:29:31.913281 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1215 23:29:31.953221 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1215 23:29:31.967197 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1215 23:29:31.991997 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1215 23:29:32.005074 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1215 23:29:32.221322 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1215 23:29:32.253512 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1215 23:29:32.278540 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1215 23:29:32.307379 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1215 23:29:32.552701 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1215 23:29:32.586929 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1215 23:29:32.626899 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1215 23:29:32.670998 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1215 23:29:32.954212 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1215 23:29:33.005999 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1215 23:29:33.048359 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1215 23:29:33.090861 132488419746432 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1215 23:29:33.126941 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1215 23:29:33.148016 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1215 23:29:33.462305 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1215 23:29:33.478749 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1215 23:29:33.501759 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1215 23:29:33.514377 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1215 23:29:33.536316 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1215 23:29:33.547750 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1215 23:29:33.582302 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1215 23:29:33.613882 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1215 23:29:33.635289 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1215 23:29:33.661993 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1215 23:29:34.060107 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1215 23:29:34.095148 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1215 23:29:34.133942 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1215 23:29:34.175441 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1215 23:29:34.214179 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1215 23:29:34.263054 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1215 23:29:34.306770 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1215 23:29:34.347455 132488419746432 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1215 23:29:34.381052 132488419746432 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9655635234114354, 'requested_slots_f1': 0.99435134409633, 'requested_slots_precision': 0.997577686594828, 'requested_slots_recall': 0.9950147639682478, 'average_goal_accuracy': 0.9705759007617871, 'average_cat_accuracy': 0.9594496159231088, 'average_noncat_accuracy': 0.9779944180008655, 'joint_goal_accuracy': 0.8876999538290449, 'joint_cat_accuracy': 0.9468028163214889, 'joint_noncat_accuracy': 0.933189423323235}
+I1215 23:29:42.451887 132488419746432 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9655635234114354, 'requested_slots_f1': 0.99435134409633, 'requested_slots_precision': 0.997577686594828, 'requested_slots_recall': 0.9950147639682478, 'average_goal_accuracy': 0.9705759007617871, 'average_cat_accuracy': 0.9594496159231088, 'average_noncat_accuracy': 0.9779944180008655, 'joint_goal_accuracy': 0.8876999538290449, 'joint_cat_accuracy': 0.9468028163214889, 'joint_noncat_accuracy': 0.933189423323235}
+Validation accuracy: 0.8876999538290449
+Validation unseen accuracy: 0.8386766513186912
+Saving checkpoint for epoch 4
+100% 10986/10987 [1:35:46<00:00,  2.62it/s]
+Validation loss: 0.014682435375012863
+Saving checkpoint for epoch 4
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-16 00:01:22.402339: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-16 00:01:22.402388: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-16 00:01:22.404223: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-16 00:01:23.460698: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1216 00:01:25.067637 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1216 00:01:25.090347 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1216 00:01:25.113280 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1216 00:01:25.275898 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1216 00:01:25.304810 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1216 00:01:25.318637 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1216 00:01:25.343242 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1216 00:01:25.356050 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1216 00:01:25.568836 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1216 00:01:25.601343 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1216 00:01:25.626787 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1216 00:01:25.656404 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1216 00:01:25.900275 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1216 00:01:25.934283 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1216 00:01:25.974198 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1216 00:01:26.018308 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1216 00:01:26.301414 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1216 00:01:26.353186 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1216 00:01:26.395079 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1216 00:01:26.437392 139012255445632 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1216 00:01:26.472851 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1216 00:01:26.493994 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1216 00:01:26.810414 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1216 00:01:26.827306 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1216 00:01:26.850368 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1216 00:01:26.862959 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1216 00:01:26.884844 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1216 00:01:26.896483 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1216 00:01:26.930852 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1216 00:01:26.962322 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1216 00:01:26.983656 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1216 00:01:27.010299 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1216 00:01:27.405082 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1216 00:01:27.439298 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1216 00:01:27.477107 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1216 00:01:27.518014 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1216 00:01:27.555691 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1216 00:01:27.604362 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1216 00:01:27.647718 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1216 00:01:27.688003 139012255445632 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1216 00:01:27.722553 139012255445632 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9642213444798098, 'requested_slots_f1': 0.9938745510091909, 'requested_slots_precision': 0.9972900768237655, 'requested_slots_recall': 0.9946121102887602, 'average_goal_accuracy': 0.9754505593301764, 'average_cat_accuracy': 0.9645391077307299, 'average_noncat_accuracy': 0.9821332107312851, 'joint_goal_accuracy': 0.8973603827127352, 'joint_cat_accuracy': 0.9471733849384444, 'joint_noncat_accuracy': 0.9426461057636997}
+I1216 00:01:35.625338 139012255445632 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9642213444798098, 'requested_slots_f1': 0.9938745510091909, 'requested_slots_precision': 0.9972900768237655, 'requested_slots_recall': 0.9946121102887602, 'average_goal_accuracy': 0.9754505593301764, 'average_cat_accuracy': 0.9645391077307299, 'average_noncat_accuracy': 0.9821332107312851, 'joint_goal_accuracy': 0.8973603827127352, 'joint_cat_accuracy': 0.9471733849384444, 'joint_noncat_accuracy': 0.9426461057636997}
+Validation accuracy: 0.8973603827127352
+Validation unseen accuracy: 0.8492928111493341
+Saving checkpoint for epoch 4
+Saving checkpoint for epoch 4
+100% 10987/10987 [1:48:43<00:00,  1.68it/s] 
+
+Train loss: 0.00834009360865564
+Epoch: 5
+ 36% 3999/10987 [25:31<43:51,  2.66it/s]
+Validation loss: 0.013901142507885014
+Saving checkpoint for epoch 5
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-16 00:39:45.908276: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-16 00:39:45.908334: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-16 00:39:45.910217: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-16 00:39:46.943876: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1216 00:39:48.556104 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1216 00:39:48.578525 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1216 00:39:48.601705 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1216 00:39:48.764221 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1216 00:39:48.791885 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1216 00:39:48.805705 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1216 00:39:48.830256 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1216 00:39:48.843122 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1216 00:39:49.053570 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1216 00:39:49.085465 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1216 00:39:49.110266 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1216 00:39:49.139175 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1216 00:39:49.387736 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1216 00:39:49.422122 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1216 00:39:49.463085 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1216 00:39:49.507607 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1216 00:39:49.789463 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1216 00:39:49.841215 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1216 00:39:49.883162 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1216 00:39:49.925461 135486946124416 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1216 00:39:49.961130 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1216 00:39:49.982202 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1216 00:39:50.310742 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1216 00:39:50.327051 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1216 00:39:50.349880 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1216 00:39:50.362572 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1216 00:39:50.384402 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1216 00:39:50.395712 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1216 00:39:50.430329 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1216 00:39:50.462007 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1216 00:39:50.483317 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1216 00:39:50.509723 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1216 00:39:50.905024 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1216 00:39:50.939274 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1216 00:39:50.977118 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1216 00:39:51.017876 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1216 00:39:51.056059 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1216 00:39:51.113462 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1216 00:39:51.157063 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1216 00:39:51.197922 135486946124416 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1216 00:39:51.231769 135486946124416 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9675576178241362, 'requested_slots_f1': 0.9938630466183481, 'requested_slots_precision': 0.9967276399381318, 'requested_slots_recall': 0.995053111937723, 'average_goal_accuracy': 0.9781425267409827, 'average_cat_accuracy': 0.9687724675521246, 'average_noncat_accuracy': 0.983837033030434, 'joint_goal_accuracy': 0.8958958315757183, 'joint_cat_accuracy': 0.9424795157903405, 'joint_noncat_accuracy': 0.9456574260842888}
+I1216 00:39:59.191631 135486946124416 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9675576178241362, 'requested_slots_f1': 0.9938630466183481, 'requested_slots_precision': 0.9967276399381318, 'requested_slots_recall': 0.995053111937723, 'average_goal_accuracy': 0.9781425267409827, 'average_cat_accuracy': 0.9687724675521246, 'average_noncat_accuracy': 0.983837033030434, 'joint_goal_accuracy': 0.8958958315757183, 'joint_cat_accuracy': 0.9424795157903405, 'joint_noncat_accuracy': 0.9456574260842888}
+Validation accuracy: 0.8958958315757183
+Validation unseen accuracy: 0.8398125077180911
+Saving checkpoint for epoch 5
+ 73% 7999/10987 [1:03:51<19:29,  2.56it/s]
+Validation loss: 0.015040656748770224
+Saving checkpoint for epoch 5
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-16 01:18:14.341767: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-16 01:18:14.341826: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-16 01:18:14.343650: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-16 01:18:15.379338: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1216 01:18:17.017310 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1216 01:18:17.040068 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1216 01:18:17.063482 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1216 01:18:17.242480 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1216 01:18:17.273042 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1216 01:18:17.287406 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1216 01:18:17.312213 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1216 01:18:17.325065 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1216 01:18:17.532067 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1216 01:18:17.564628 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1216 01:18:17.590061 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1216 01:18:17.619737 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1216 01:18:17.866219 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1216 01:18:17.900605 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1216 01:18:17.940892 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1216 01:18:17.985496 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1216 01:18:18.269159 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1216 01:18:18.322219 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1216 01:18:18.364491 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1216 01:18:18.407363 136216557761152 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1216 01:18:18.443874 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1216 01:18:18.464723 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1216 01:18:18.783218 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1216 01:18:18.799636 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1216 01:18:18.822708 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1216 01:18:18.835461 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1216 01:18:18.857612 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1216 01:18:18.869140 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1216 01:18:18.904083 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1216 01:18:18.935888 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1216 01:18:18.957561 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1216 01:18:18.984746 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1216 01:18:19.386608 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1216 01:18:19.421934 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1216 01:18:19.460317 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1216 01:18:19.501623 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1216 01:18:19.539988 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1216 01:18:19.589248 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1216 01:18:19.633540 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1216 01:18:19.676488 136216557761152 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1216 01:18:19.710229 136216557761152 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9629175135176592, 'requested_slots_f1': 0.993792742007644, 'requested_slots_precision': 0.9979483836330866, 'requested_slots_recall': 0.9938451508992598, 'average_goal_accuracy': 0.9742394791023264, 'average_cat_accuracy': 0.9632856548227192, 'average_noncat_accuracy': 0.9807213399682677, 'joint_goal_accuracy': 0.8790304518157764, 'joint_cat_accuracy': 0.9339976118911352, 'joint_noncat_accuracy': 0.9353432101852207}
+I1216 01:18:27.693454 136216557761152 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9629175135176592, 'requested_slots_f1': 0.993792742007644, 'requested_slots_precision': 0.9979483836330866, 'requested_slots_recall': 0.9938451508992598, 'average_goal_accuracy': 0.9742394791023264, 'average_cat_accuracy': 0.9632856548227192, 'average_noncat_accuracy': 0.9807213399682677, 'joint_goal_accuracy': 0.8790304518157764, 'joint_cat_accuracy': 0.9339976118911352, 'joint_noncat_accuracy': 0.9353432101852207}
+Validation accuracy: 0.8790304518157764
+Validation unseen accuracy: 0.8170910815912499
+Saving checkpoint for epoch 5
+100% 10986/10987 [1:35:50<00:00,  2.61it/s]
+Validation loss: 0.014555816380765954
+Saving checkpoint for epoch 5
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2023-12-16 01:50:11.977409: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-16 01:50:11.977466: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-16 01:50:11.979304: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-16 01:50:13.014253: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+I1216 01:50:14.622389 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_001.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+I1216 01:50:14.644771 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_002.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+I1216 01:50:14.667619 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_003.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+I1216 01:50:14.832589 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_004.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+I1216 01:50:14.860390 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_005.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+I1216 01:50:14.874496 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_006.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+I1216 01:50:14.899231 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_007.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+I1216 01:50:14.911828 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_008.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+I1216 01:50:15.121039 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_009.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+I1216 01:50:15.153786 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_010.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+I1216 01:50:15.179045 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_011.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+I1216 01:50:15.208991 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_012.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+I1216 01:50:15.459286 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_013.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+I1216 01:50:15.493721 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_014.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+I1216 01:50:15.533771 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_015.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+I1216 01:50:15.578148 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_016.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+I1216 01:50:15.865407 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_017.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+I1216 01:50:15.918108 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_018.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+I1216 01:50:15.960794 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_019.json
+INFO:tensorflow:Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+I1216 01:50:16.003697 138111440761472 evaluate.py:91] Loading file: dstc8-schema-guided-dialogue/dev/dialogues_020.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_001.json
+I1216 01:50:16.040475 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_001.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_002.json
+I1216 01:50:16.061377 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_002.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_003.json
+I1216 01:50:16.378312 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_003.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_004.json
+I1216 01:50:16.394934 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_004.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_005.json
+I1216 01:50:16.418504 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_005.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_006.json
+I1216 01:50:16.431729 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_006.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_007.json
+I1216 01:50:16.454237 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_007.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_008.json
+I1216 01:50:16.466048 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_008.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_009.json
+I1216 01:50:16.502358 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_009.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_010.json
+I1216 01:50:16.534622 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_010.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_011.json
+I1216 01:50:16.556320 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_011.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_012.json
+I1216 01:50:16.582864 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_012.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_013.json
+I1216 01:50:16.981548 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_013.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_014.json
+I1216 01:50:17.016270 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_014.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_015.json
+I1216 01:50:17.054471 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_015.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_016.json
+I1216 01:50:17.095703 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_016.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_017.json
+I1216 01:50:17.134811 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_017.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_018.json
+I1216 01:50:17.183887 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_018.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_019.json
+I1216 01:50:17.227818 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_019.json
+INFO:tensorflow:Loading file: temp/pred_res/dialogues_020.json
+I1216 01:50:17.268699 138111440761472 evaluate.py:91] Loading file: temp/pred_res/dialogues_020.json
+INFO:tensorflow:len(dataset_hyp)=2482, len(dataset_ref)=2482
+I1216 01:50:17.302114 138111440761472 evaluate.py:260] len(dataset_hyp)=2482, len(dataset_ref)=2482
+INFO:tensorflow:Dialog metrics: {'active_intent_accuracy': 0.9672891820378111, 'requested_slots_f1': 0.995108077360637, 'requested_slots_precision': 0.997737469800974, 'requested_slots_recall': 0.9956666794493232, 'average_goal_accuracy': 0.977794587095699, 'average_cat_accuracy': 0.9635221553714004, 'average_noncat_accuracy': 0.9852577167171498, 'joint_goal_accuracy': 0.8896946466234614, 'joint_cat_accuracy': 0.9390208753654218, 'joint_noncat_accuracy': 0.942690290294129}
+I1216 01:50:25.390359 138111440761472 evaluate.py:267] Dialog metrics: {'active_intent_accuracy': 0.9672891820378111, 'requested_slots_f1': 0.995108077360637, 'requested_slots_precision': 0.997737469800974, 'requested_slots_recall': 0.9956666794493232, 'average_goal_accuracy': 0.977794587095699, 'average_cat_accuracy': 0.9635221553714004, 'average_noncat_accuracy': 0.9852577167171498, 'joint_goal_accuracy': 0.8896946466234614, 'joint_cat_accuracy': 0.9390208753654218, 'joint_noncat_accuracy': 0.942690290294129}
+Validation accuracy: 0.8896946466234614
+Validation unseen accuracy: 0.8260690835317984
+Saving checkpoint for epoch 5
+100% 10987/10987 [1:48:42<00:00,  1.68it/s] 
+
+Train loss: 0.007346427369499319

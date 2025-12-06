@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Model checkpoints (except best.pt which is tracked with Git LFS)
+checkpoints/*.pt
+!checkpoints/best.pt
+checkpoints/temp/
+checkpoints/experimental/
+
+# Data (too large for GitHub)
+data/dstc8-schema-guided-dialogue/
+data/full_dataset/
+*.json.gz
+*.tar.gz
+*.zip
+*.rar
+
+# Temporary files
+temp/
+tmp/
+~BROMIUM/
+.cache/
+*.log
+
+# Training outputs
+predictions/pred_res_*/
+pickles/
+figs/*.png
+figs/*.jpg
+
+# OS
+Thumbs.db
+.DS_Store
+*.tmp
+
+# PyTorch specific
+*.pth
+!checkpoints/best.pt
+
+# Results (keep only summaries)
+results/predictions/
+results/temp/
