@@ -333,7 +333,7 @@ _AI/ML Engineer & Researcher_
 
 Este proyecto está licenciado bajo la **MIT License** - ver el archivo [LICENSE](LICENSE) para detalles.
 
-[<iframe src="https://hspinal-systems.notion.site/ebd//2c3bb517bf8b80a697a2dd8a8069799e" width="100%" height="600" frameborder="0" allowfullscreen />](https://hspinal-systems.notion.site/Multi-Task-BERT-Model-for-Schema-Guided-Dialogue-State-Tracking-DST-2c3bb517bf8b80a697a2dd8a8069799e?source=copy_link)
+Link: https://hspinal-systems.notion.site/Multi-Task-BERT-Model-for-Schema-Guided-Dialogue-State-Tracking-DST-2c3bb517bf8b80a697a2dd8a8069799e
 
 ---
 
