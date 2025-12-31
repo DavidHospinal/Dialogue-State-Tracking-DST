@@ -126,7 +126,7 @@ tqdm, scikit-learn, matplotlib, nltk
 #   └── test/
 ```
 
-### 4. Entrenamiento
+### 4. Entrenamiento por Épocas
 
 ```bash
 # Entrenamiento completo (5 epochs, batch size 24)
