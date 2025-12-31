@@ -312,6 +312,9 @@ MAX_VALUES_PER_SERVICE = 23
 
 ## 👤 Autor y Contacto
 
+![Gift-Firma de Correo Electrónico  (Alta Resolución)](https://github.com/user-attachments/assets/57071453-6805-4c5f-97de-e158cdcc3910)
+
+
 **Oscar David Hospinal**
 _AI/ML Engineer & Researcher_
 
